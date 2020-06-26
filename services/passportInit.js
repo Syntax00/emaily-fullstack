@@ -21,6 +21,7 @@ passport.use(
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback",
+      proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
       // 1- First, we need to determine whether or not the user that's currently trying to login exists already in our DB or not
