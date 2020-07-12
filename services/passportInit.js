@@ -23,7 +23,7 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true,
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (_, __, profile, done) => {
       // 1- First, we need to determine whether or not the user that's currently trying to login exists already in our DB or not
       // If, he/she exists, we will not restore him/her again. Instead, we resume the flow. Else, we create a new Model Instance
       // for him/her, and then save this Record to MongoDB.
@@ -31,7 +31,7 @@ passport.use(
       if (user) {
         // Resume authentication flow
 
-        done(null, user);
+        return done(null, user);
       }
 
       // 2- To insert/create a new Model Instance, we call the Users constructure, and provide it with the Document
